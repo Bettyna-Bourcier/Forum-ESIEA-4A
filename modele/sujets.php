@@ -14,3 +14,17 @@ function creation_sujet($titre, $contenu, $user_id)
         die('Erreur : ' . $e->getMessage());
     }
 }
+
+
+function recuperation_sujets()
+{
+    try {
+        global $bdd;
+        $req = $bdd->prepare('SELECT * FROM sujets');
+        $req->execute();
+        $sujets = $req->fetchAll();
+        return $sujets;
+    } catch (Exception $ex) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}

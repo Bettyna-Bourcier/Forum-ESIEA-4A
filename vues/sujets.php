@@ -7,6 +7,7 @@
  */
 session_start();
 include_once('../lib/utilisateur.php');
+include_once('../modele/sujets.php');
 ?>
 <!DOCTYPE html>
 
@@ -34,18 +35,14 @@ include_once('../lib/utilisateur.php');
 		<?php
 		if(isActif()) {
 
-			$sujets = scandir('../sujets'); // on récupère tous les fichiers dans le dossiers sujets
+			$sujets = recuperation_sujets();
 			?>
 			<ul>
 				<?php
-				// les deux premiers elements du tableau sont [., ..] => on les ignore
-				//on parcourt les sujets pour afficher leur titre (1ere ligne du fichier)
-				for ($i = 2; $i < sizeof($sujets); $i++) {
-					$monFichier = fopen('../sujets/' . $sujets[$i], 'r');
+				foreach($sujets as $sujet) {
 					?>
-					<li><a href="sujet.php?sujet=<?php echo $sujets[$i] ?>"><?php echo fgets($monFichier) ?></a></li>
+					<li><a href="sujet.php?sujet=<?php echo $sujet['id'] ?>"><?php echo $sujet['titre'] ?></a></li>
 					<?php
-					fclose($monFichier);
 				}
 				?>
                                         
