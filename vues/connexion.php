@@ -36,7 +36,7 @@ if(isConnected()) {
 
 
     <p>Mot de passe:
-        <input type='text' name='mdpIdentification'></p>
+        <input type='password' name='mdpIdentification'></p>
 
     <input type="submit" name="connectionBouton" action="">
 

@@ -18,7 +18,7 @@ if(!isset($_SESSION['identifiant'])) { // on redirige sur la page de connexion s
     $utilisateur = infos_utilisateur($_SESSION['identifiant']);
 ?>
 
-<p><h3>Bienvenue sur votre espace personnel : <?php echo $_SESSION['identifiant']; ?></h3></p>
+<p><h3>Bienvenue sur votre espace personnel <?php echo $_SESSION['identifiant']; ?>.</h3></p>
 
 <?php
 
