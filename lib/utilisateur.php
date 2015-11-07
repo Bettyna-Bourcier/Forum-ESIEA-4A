@@ -9,5 +9,5 @@ function isConnected() {
 }
 
 function isActif() {
-    return isset($_SESSION['pseudo']) AND file_exists('../utilisateurs/'.$_SESSION['pseudo'].'/is_actif.txt');
+    return isset($_SESSION['identifiant']) AND is_actif($_SESSION['identifiant']);
 }

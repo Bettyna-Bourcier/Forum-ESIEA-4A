@@ -48,7 +48,21 @@ include_once('../lib/utilisateur.php');
 					fclose($monFichier);
 				}
 				?>
+                                        
 			</ul>
+
+                        <h2>Création d'un sujet</h2>
+                        <?php 
+                            if (isset($_GET['erreur']) && $_GET['erreur'] == 'creation_sujet')
+                            {
+                                echo '<p>Veuillez renseigner un titre et un contenu lors de la création du sujet.</p>';
+                            }      
+                        ?>
+                        <form action="../controleur/sujets.php" method="post">
+                            <p>Titre du sujet : <input type="text" name="nom_sujet"></p>
+                            <p>Contenu du sujet : <textarea name="contenu_sujet"></textarea></p>
+                            <input type="submit">
+                        </form>
 			<?php
 		} else { // utilisateur pas actif
 			if(isConnected()) {

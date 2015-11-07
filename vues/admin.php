@@ -101,12 +101,5 @@ $sujets = scandir('../sujets'); // on récupère tous les fichiers dans le dossi
     }
     ?>
 </ul>
-
-<h2>Création d'un sujet</h2>
-
-<form action="../actions/creation_sujet.php" method="post">
-    <input type="text" name="nomSujet">
-    <input type="submit">
-</form>
 </body>
 </html>
