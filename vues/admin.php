@@ -38,28 +38,10 @@ include_once('../modele/admin.php');
 
             <?php
             $utilisateurs_actifs = recuperer_utilisateurs(1);
-//            foreach ($utilisateurs_actifs as $utilisateur) {
-//                echo '<tr>';
-//                echo '<td>' . '<input type="text" name="identifiant[' . $utilisateur['id'] . ']" value=' . $utilisateur['identifiant'] . '></td>';
-//                echo '<td>' . '<input type="text" name="nom[' . $utilisateur['id'] . ']" value=' . $utilisateur['nom'] . '></td>';
-//                echo '<td>' . '<input type="text" name="prenom[' . $utilisateur['id'] . ']" value=' . $utilisateur['prenom'] . '></td>';
-//                echo '<td>' . '<input type="text" name="adresse_mail[' . $utilisateur['id'] . ']" value=' . $utilisateur['adresse_mail'] . '></td>';
-//                echo '<td>' . '<input type="text" name="adresse_mail_secours[' . $utilisateur['id'] . ']" value=' . $utilisateur['adresse_mail_secours'] . '></td>';
-//                echo '<td>' . '<input type="text" name="signature[' . $utilisateur['id'] . ']" value=' . $utilisateur['signature'] . '></td>';
-//                echo '<td>' . '<input type="text" name="image[' . $utilisateur['id'] . ']" value=' . $utilisateur['image'] . '></td>';
-//                echo '<td>' . '<input type="text" name="actif[' . $utilisateur['id'] . ']" value=' . $utilisateur['actif'] . '></td>';
-//                echo '<td>' . '<input type="text" name="admin[' . $utilisateur['id'] . ']" value=' . $utilisateur['admin'] . '></td>';
-//                echo '<td>' . '<input type="text" name="super_admin[' . $utilisateur['id'] . ']" value=' . $utilisateur['super_admin'] . '></td>';
-//                echo '</tr>';
-//            }
-
-
-
-
 
             foreach ($utilisateurs_actifs as $utilisateur) {
                 echo '<tr>';
-                echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[identifiant]" . '" value=' . $utilisateur['identifiant'] . '></td>';
+                echo '<td>' . $utilisateur['identifiant'] . '</td>';
                 echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[nom]" . '" value=' . $utilisateur['nom'] . '></td>';
                 echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[prenom]" . '" value=' . $utilisateur['prenom'] . '></td>';
                 echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[adresse_mail]" . '" value=' . $utilisateur['adresse_mail'] . '></td>';

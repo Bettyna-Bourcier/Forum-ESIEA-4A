@@ -133,3 +133,28 @@ function emplacement_image($identifiant, $image)
         die('Erreur : ' .$e->getMessage());
     }
 }
+
+
+// Récupère toutes les infos dans la bdd d'un utilisateur
+function infos_utilisateur($identifiant)
+{
+    try {
+        global $bdd;
+        $req= $bdd->prepare('SELECT * FROM utilisateurs WHERE identifiant=?');
+        $req->execute(array($identifiant));
+        $utilisateur = $req->fetch();
+        if(empty($utilisateur))
+        {
+            return false;
+        } else
+        {
+            return $utilisateur;
+        }
+    } catch (Exception $ex) {
+        die('Erreur : ' .$e->getMessage());
+    }
+    
+    
+    
+    
+}

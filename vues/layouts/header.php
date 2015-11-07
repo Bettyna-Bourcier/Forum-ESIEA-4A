@@ -1,6 +1,7 @@
 <?php
     include_once('../lib/utilisateur.php') ;
     include_once('../modele/admin.php');
+    include_once ('../modele/utilisateurs.php');
 ?>
 
 <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">

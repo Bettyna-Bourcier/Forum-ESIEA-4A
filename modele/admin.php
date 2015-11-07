@@ -37,7 +37,22 @@ function is_admin($identifiant)
     }
 }
 
+function is_actif($identifiant) {
+        try {
+        global $bdd;
+        $req = $bdd->prepare('SELECT actif FROM utilisateurs WHERE identifiant = ?');
+        $req->execute(array($identifiant));
+        $admin = $req->fetchAll(PDO::FETCH_COLUMN, 0); // Récupère la valeur de la première colonne
 
+        if ($admin[0] == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
 
 // On récupère tous les utilisateurs actifs ou non actif selon $actif dans la bdd
 function recuperer_utilisateurs($actif = 1)

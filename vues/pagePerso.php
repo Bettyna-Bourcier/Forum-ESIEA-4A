@@ -14,12 +14,19 @@ if(!isset($_SESSION['identifiant'])) { // on redirige sur la page de connexion s
 </head>
 
 <body>
-<?php include_once('layouts/header.php') ?>
+<?php include_once('layouts/header.php');
+    $utilisateur = infos_utilisateur($_SESSION['identifiant']);
+?>
 
 <p><h3>Bienvenue sur votre espace personnel : <?php echo $_SESSION['identifiant']; ?></h3></p>
 
 <?php
-    if(file_exists('../utilisateurs/'.$_SESSION['pseudo'].'/is_actif.txt')) {
+
+    if(isset($_GET['erreur']) && $_GET['erreur'] == 'image_size')
+    {
+        echo '<p classe="alert">Le taille de l\'image ne doit pas être supérieure à 150x150 et ne doit pas dépasser 2Mo.</p>';
+    }
+    if(is_actif($_SESSION['identifiant'])) {
         echo '<p>Votre compte est validé.</p>';
     } else {
         echo '<p>Votre inscription au forum doit être valider par les administrateurs.</p>';
@@ -28,7 +35,7 @@ if(!isset($_SESSION['identifiant'])) { // on redirige sur la page de connexion s
 
 <?php // si une photo est présente pour l'utilsateur, on l'affiche
 if(file_exists('../utilisateurs/'.$_SESSION['identifiant'].'/image.jpeg')) {
-    echo "<img src='../utilisateurs/".$_SESSION['identifiant']."/image.jpeg' />";
+    echo "<img src='../utilisateurs/".$_SESSION['identifiant']."/image.jpeg?". time() ."' />"; // time() retourne le nombre de s depuis le 01/01/1970 => éviter le cache navigateur
 }
 ?>
 
@@ -45,7 +52,7 @@ if(file_exists('../utilisateurs/'.$_SESSION['identifiant'].'/image.jpeg')) {
 <form action="../controleur/pagePerso.php" method="POST">
 
     <h3>Changer ma signature</h3>
-    <textarea name="textAreaSignature"><?php echo $_SESSION['textAreaSignature'] ?></textarea>
+    <textarea name="textAreaSignature"><?php echo $utilisateur['signature'] ?></textarea>
     <input type="submit" name="signatureSubmit">
 
 </form>
@@ -55,19 +62,19 @@ if(file_exists('../utilisateurs/'.$_SESSION['identifiant'].'/image.jpeg')) {
 <form method="POST" action="../controleur/pagePerso.php">
     <h3>Changer mes informations personnelles</h3>
 
-    <p>Adresse email: <input type="text" name="email" value=<?php echo $_SESSION['email']?>></p>
-    <p>Adresse email de secours: <input type="text" name="emailSecours"  value=<?php echo $_SESSION['emailSecours']?>>
-    <p>Nom: <input type="text" name="nom"  value=<?php echo $_SESSION['nom']?>></p>
-    <p>Prénom: <input type = "text" name="prenom"  value=<?php echo $_SESSION['prenom']?>></p>
-    <p>Age: <input type="text" name="age"  value=<?php echo $_SESSION['age']?>></p>
+    <p>Adresse email: <input type="text" name="email" value=<?php echo $utilisateur['adresse_mail']?>></p>
+    <p>Adresse email de secours: <input type="text" name="emailSecours"  value=<?php echo $utilisateur['adresse_mail_secours']?>>
+    <p>Nom: <input type="text" name="nom"  value=<?php echo $utilisateur['nom']?>></p>
+    <p>Prénom: <input type = "text" name="prenom"  value=<?php echo $utilisateur['prenom']?>></p>
+    <p>Age: <input type="text" name="age"  value=<?php echo $utilisateur['age']?>></p>
     <p><input type="submit" name="boutonModif"></p>
 
 </form>
 
 <h3>Changer mon mot de passe</h3>
 <form method="POST" action="../controleur/pagePerso.php">
-    <p>Mot de passe: <input type="text" name="mdpModif"></p>
-    <p>Vérification de mot de passe: <input type="text" name="verifMdpModif"></p>
+    <p>Mot de passe: <input type="password" name="mdpModif"></p>
+    <p>Vérification de mot de passe: <input type="password" name="verifMdpModif"></p>
     <p><input type="submit" name="mdpModifSubmit"></p>
 </form>
 

@@ -10,10 +10,10 @@ if(validating_user())
     header('Location: ../vues/admin.php');
 }elseif(modifying_users())
 {
-    var_dump($_POST);
-    foreach ($_POST as $utilisateur) {
+    foreach ($_POST as $identifiant => $utilisateur) {
         if(is_array($utilisateur)) {
-             modifier_utilisateur($utilisateur['identifiant'], $utilisateur['nom'], $utilisateur['prenom'], $utilisateur['adresse_mail'], $utilisateur['adresse_mail_secours'], $utilisateur['actif'], $utilisateur['signature'], $utilisateur['admin'], $utilisateur['image']);
+             modifier_utilisateur($identifiant, $utilisateur['nom'], $utilisateur['prenom'], $utilisateur['adresse_mail'], $utilisateur['adresse_mail_secours'], $utilisateur['actif'], $utilisateur['signature'], $utilisateur['admin'], $utilisateur['image']);
+             header('Location: ../vues/admin.php');
         }
            
     }

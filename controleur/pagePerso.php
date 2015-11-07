@@ -43,12 +43,19 @@ if (isset($_POST['boutonModif'])) // Formulaire de modification des infos du com
     $finfo = finfo_open(FILEINFO_MIME_TYPE); // Retourne le type mime de l'extension mimetype
     if (finfo_file($finfo, $_FILES['file']['tmp_name']) == 'image/jpeg') // On accepte que les images jpeg
     {
-        mkdir("../utilisateurs/".$_SESSION['identifiant']);
-        $emplacement_image = "../utilisateurs/" . $_SESSION['identifiant'] . '/image.jpeg';
-        move_uploaded_file($_FILES['file']['tmp_name'], $emplacement_image);
-        emplacement_image($_SESSION['identifiant'], $emplacement_image); // Enregistrement de l'emplacement de l'image dans la bdd
+        // Taille de l'image <= 150x150 et <= 2Mo
+        if(getimagesize($_FILES['file']['tmp_name'])[0] <= 150 && getimagesize($_FILES['file']['tmp_name'])[1] <= 150 && filesize($_FILES['file']['tmp_name']) <= 2097152) {
+            mkdir("../utilisateurs/".$_SESSION['identifiant']);
+            $emplacement_image = "../utilisateurs/" . $_SESSION['identifiant'] . '/image.jpeg';
+            move_uploaded_file($_FILES['file']['tmp_name'], $emplacement_image);
+            emplacement_image($_SESSION['identifiant'], $emplacement_image); // Enregistrement de l'emplacement de l'image dans la bdd
+            header('Location: ../vues/pagePerso.php');
+        } else
+        {
+            header('Location: ../vues/pagePerso.php?erreur=image_size');
+        }
     }
-    header('Location: ../vues/pagePerso.php');
+   
 } else {
     header('Location: ../vues/pagePerso.php?erreur=true');
 }
