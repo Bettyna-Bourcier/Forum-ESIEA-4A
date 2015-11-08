@@ -42,3 +42,16 @@ function recuperation_sujet($id)
         die('Erreur : ' . $e->getMessage());
     }
 }
+
+
+// Supprime un sujet 
+function supprimer_sujet($sujet_id)
+{
+    try {
+        global $bdd;
+        $req = $bdd->prepare('DELETE FROM sujets WHERE id=?');
+        $req->execute(array($sujet_id));
+    } catch (Exception $ex) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}

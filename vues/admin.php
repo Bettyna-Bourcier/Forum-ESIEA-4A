@@ -1,105 +1,95 @@
 <?php
 session_start();
 include_once('../modele/admin.php');
-
+include_once('../modele/sujets.php');
 ?>
 <!DOCTYPE html>
 
 <html>
 
-<head>
-    <meta charset="utf-8"/>
-    <title>Connexion forum</title>
-</head>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Connexion forum</title>
+    </head>
 
-<body>
-<?php include_once('layouts/header.php'); ?>
-<h1>Utilisateurs actifs</h1>
-<ul>
+    <body>
+        <?php include_once('layouts/header.php'); ?>
+        <h1>Utilisateurs actifs</h1>
+        <ul>
 
-    <form method="post" action="../controleur/admin.php">
-
-
-        <table border="2" class="table">
-            <tr>
-                <th>Identifiant</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Adresse mail</th>
-                <th>Adresse mail de secours</th>
-                <th>Signature</th>
-                <th>Image</th>
-                <th>Actif</th>
-                <th>Admin</th>
-                <th>Super Admin</th>
-
-            </tr>
+            <form method="post" action="../controleur/admin.php">
 
 
+                <table border="2" class="table">
+                    <tr>
+                        <th>Identifiant</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Adresse mail</th>
+                        <th>Adresse mail de secours</th>
+                        <th>Signature</th>
+                        <th>Image</th>
+                        <th>Actif</th>
+                        <th>Admin</th>
+                        <th>Super Admin</th>
+
+                    </tr>
+
+
+                    <?php
+                    $utilisateurs_actifs = recuperer_utilisateurs(1);
+
+                    foreach ($utilisateurs_actifs as $utilisateur) {
+                        echo '<tr>';
+                        echo '<td>' . $utilisateur['identifiant'] . '</td>';
+                        echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant'] . "[nom]" . '" value=' . $utilisateur['nom'] . '></td>';
+                        echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant'] . "[prenom]" . '" value=' . $utilisateur['prenom'] . '></td>';
+                        echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant'] . "[adresse_mail]" . '" value=' . $utilisateur['adresse_mail'] . '></td>';
+                        echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant'] . "[adresse_mail_secours]" . '" value=' . $utilisateur['adresse_mail_secours'] . '></td>';
+                        echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant'] . "[signature]" . '" value=' . $utilisateur['signature'] . '></td>';
+                        echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant'] . "[image]" . '" value=' . $utilisateur['image'] . '></td>';
+                        echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant'] . "[actif]" . '" value=' . $utilisateur['actif'] . '></td>';
+                        echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant'] . "[admin]" . '" value=' . $utilisateur['admin'] . '></td>';
+                        echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant'] . "[super_admin]" . '" value=' . $utilisateur['super_admin'] . '></td>';
+                        echo '</tr>';
+                    }
+                    ?>
+
+                </table>
+                <input type="submit" name="modification_submit">
+            </form>
+
+        </ul>
+
+        <h1>Utilisateurs à valider</h1>
+        <ul>
             <?php
-            $utilisateurs_actifs = recuperer_utilisateurs(1);
-
-            foreach ($utilisateurs_actifs as $utilisateur) {
-                echo '<tr>';
-                echo '<td>' . $utilisateur['identifiant'] . '</td>';
-                echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[nom]" . '" value=' . $utilisateur['nom'] . '></td>';
-                echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[prenom]" . '" value=' . $utilisateur['prenom'] . '></td>';
-                echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[adresse_mail]" . '" value=' . $utilisateur['adresse_mail'] . '></td>';
-                echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[adresse_mail_secours]" . '" value=' . $utilisateur['adresse_mail_secours'] . '></td>';
-                echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[signature]" . '" value=' . $utilisateur['signature'] . '></td>';
-                echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[image]" . '" value=' . $utilisateur['image'] . '></td>';
-                echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[actif]" . '" value=' . $utilisateur['actif'] . '></td>';
-                echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[admin]" . '" value=' . $utilisateur['admin'] . '></td>';
-                echo '<td>' . '<input type="text" name="' . $utilisateur['identifiant']."[super_admin]" . '" value=' . $utilisateur['super_admin'] . '></td>';
-                echo '</tr>';
-            }
-            ?>
-
-        </table>
-        <input type="submit" name="modification_submit">
-    </form>
-
-</ul>
-
-<h1>Utilisateurs à valider</h1>
-<ul>
+            $utilisateurs_a_valider = recuperer_utilisateurs(0);
+            // on affiche les utilisateurs a valider
+            foreach ($utilisateurs_a_valider as $utilisateur) {
+                ?>
+                <li><?php echo $utilisateur['identifiant'] ?>
+                    <a href="../controleur/admin.php?pseudo=<?php echo $utilisateur['identifiant'] ?>">
+                        Activer
+                    </a>
+                </li>
     <?php
+}
+?>
+        </ul>
 
-    $utilisateurs_a_valider = recuperer_utilisateurs(0);
-    // on affiche les utilisateurs a valider
-    foreach ($utilisateurs_a_valider as $utilisateur) {
-        ?>
-        <li><?php echo $utilisateur['identifiant'] ?>
-            <a href="../controleur/admin.php?pseudo=<?php echo $utilisateur['identifiant'] ?>">
-                Activer
-            </a>
-        </li>
-        <?php
-    }
-    ?>
-</ul>
-
-<h1>Sujets</h1>
-<!-- Liste de tous les sujets -->
+        <h1>Sujets</h1>
+        <!-- Liste de tous les sujets -->
 <?php
 $sujets = scandir('../sujets'); // on récupère tous les fichiers dans le dossiers sujets
 ?>
-<ul>
-    <?php
-    // les deux premiers elements du tableau sont [., ..] => on les ignore
-    //on parcourt les sujets pour afficher leur titre (1ere ligne du fichier)
-    for ($i = 2; $i < sizeof($sujets); $i++) {
-        $monFichier = fopen('../sujets/' . $sujets[$i], 'r');
-        ?>
-        <li>
-            <a href="sujet.php?sujet=<?php echo $sujets[$i] ?>"><?php echo fgets($monFichier) ?></a>
-            <!-- lien de supression -->
-            <a href="../actions/supprimer_sujet.php?sujet=<?php echo $sujets[$i] ?>">Supprimer</a>
-        </li>
+        <ul>
         <?php
-        fclose($monFichier);
-    }
-    ?>
-</ul>
-</body>
+        $sujets = recuperation_sujets();
+        foreach ($sujets as $sujet) {
+            echo'<p><a href="../vues/sujet.php?sujet= '.$sujet['id'].'">'. $sujet['titre'] . '</a><a href=\'../controleur/sujets.php?supprimer=' . $sujet['id'] . '\'>  Supprimer</a></p>';
+        }
+        ?>
+        </ul>
+    </body>
 </html>
