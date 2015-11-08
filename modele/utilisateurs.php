@@ -154,7 +154,4 @@ function infos_utilisateur($identifiant)
         die('Erreur : ' .$e->getMessage());
     }
     
-    
-    
-    
 }

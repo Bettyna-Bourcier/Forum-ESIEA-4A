@@ -7,10 +7,11 @@ include_once('../connection_bdd.php');
 function is_super_admin($identifiant)
 {
     global $bdd;
-    $req = $bdd->prepare('SELECT super_admin FROM utilisateurs WHERE identifiant = $identifiant');
+    $req = $bdd->prepare('SELECT super_admin FROM utilisateurs WHERE identifiant = ?');
     $req->execute(array($identifiant));
+    $superAdmin = $req->fetchAll(PDO::FETCH_COLUMN, 0); // Récupère la valeur de la première colonne
 
-    if ($req == true) {
+    if ($superAdmin[0] == 1) {
         return true;
     } else {
         return false;
