@@ -15,15 +15,29 @@ function creation_sujet($titre, $contenu, $user_id)
     }
 }
 
-
+// Récupère tous les sujets créés
 function recuperation_sujets()
 {
     try {
         global $bdd;
-        $req = $bdd->prepare('SELECT * FROM sujets');
+        $req = $bdd->prepare('SELECT sujets.*, utilisateurs.identifiant FROM sujets JOIN utilisateurs ON sujets.utilisateurs_id = utilisateurs.id');
         $req->execute();
         $sujets = $req->fetchAll();
         return $sujets;
+    } catch (Exception $ex) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+// Récupère un sujet 
+function recuperation_sujet($id)
+{
+    try {
+        global $bdd;
+        $req = $bdd->prepare('SELECT sujets.*, utilisateurs.identifiant, utilisateurs.signature FROM sujets JOIN utilisateurs ON sujets.utilisateurs_id = utilisateurs.id WHERE sujets.id=?');
+        $req->execute(array($id));
+        $sujet = $req->fetch();
+        return $sujet;
     } catch (Exception $ex) {
         die('Erreur : ' . $e->getMessage());
     }

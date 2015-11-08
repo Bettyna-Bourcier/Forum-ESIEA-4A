@@ -1,48 +1,52 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 
 <html>
 
-<head>
-    <meta charset="UTF-8"/>
-    <title>Forum PHP</title>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Forum PHP</title>
 
-</head>
+    </head>
 
-<body>
-<?php include_once('layouts/header.php'); ?>
-<?php
-/* Lecture du sujet1 afin de l'afficher ligne par ligne */
-$sujet = fopen('../sujets/'.$_GET['sujet'], 'r');
-if($sujet) {
+    <body>
 
-    /* tant que l'on est pas à la fin du fichier texte ... */
-    while(!feof($sujet)) {
-        $buffer = fgets($sujet); /* fgets retourne une ligne */
-        echo $buffer . '</br>';
-    }
-
-    fclose($sujet);
-}
-
-/* Si l'utilisateur est connecté au forum, alors il peut écrire un message dans un textArea et cela s'enregistre dans le sujet. */
-    if(isset($_SESSION['pseudo'])) {
-        ?>
-        <h1>Vous pouvez répondre :</h1>
-        <form action="../actions/sujet.php?sujet=<?php echo $_GET['sujet'] ?>" method="POST">
-
-            <textarea name="textArea" id="1" cols="30" rows="10"></textarea>
-            <input type="submit" name="textAreaSubmit">
-        </form>
         <?php
-    }
+        include_once('layouts/header.php');
+        include_once('../modele/sujets.php');
+        include_once('../modele/post.php');
 
-?>
+        $sujet = recuperation_sujet($_GET['sujet']);
+        echo '<p>' . $sujet['titre'] . '</p>';
+        echo '<p>Sujet créé par : ' . $sujet['identifiant'] . '</p>';
+        echo '<p>Contenu : ' . $sujet['contenu'] . '</p>';
+        echo '<p>'.$sujet['signature'].'</p>';
+        
+        $posts = recuperer_posts($sujet['id']);
+        foreach($posts as $post)
+        {
+            echo '<p>'.$post['identifiant'].'</p>';
+            echo '<p>'.$post['contenu'].'</p>';
+            echo '<p>'.$post['signature'].'</p>';
+        }
+
+        /* Si l'utilisateur est connecté au forum et actif alors il peut répondre au sujet */
+        if (isActif()) {
+            ?>
+            <h1>Vous pouvez répondre :</h1>
+            <form action="../controleur/post.php?sujet=<?php echo $_GET['sujet'] ?>" method="POST">
+
+                <textarea name="contenu" id="1" cols="30" rows="10"></textarea>
+                <input type="submit" name="textAreaSubmit">
+            </form>
+            <?php
+        }
+        ?>
 
 
 
-</body>
+    </body>
 
 </html>
