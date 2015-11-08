@@ -10,30 +10,55 @@
 
 <html>
 
-<head>
-    <meta charset="utf-8"/>
-    <title>Connexion forum</title>
-</head>
-<body>
-<?php include_once('layouts/header.php'); ?>
-<p><h3>Inscription</h3></p>
-<form method="POST" action="../controleur/inscription.php">
-    <p>Renseignements obligatoires :</p>
-
-    <p>Identifiant :
-        <input type="text" name="pseudo":/></p>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Connexion forum</title>
+    </head>
+    <body>
+        <?php include_once('layouts/header.php'); ?>
 
 
-    <p>Mot de passe:
-        <input type="text" name="mdp":/></p>
+        <div class="container">
+            <h3>Inscription</h3>
+            <form class="form-horizontal" method="POST" action="../controleur/inscription.php">
+                <h4>Tous les renseignements demandés sont obligatoires.</h4>
 
-    <p>Vérification du mot de passe:
-        <input type="text" name="verifMdp":/></p>
+                <div class="form-group">
+                    <label for="identifiant" class="col-sm-2 control-label">Identifiant</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="identifiant" name="pseudo"/>
+                    </div>       
+                </div>
 
-    <p>Adresse email: :
-        <input type="text" name="mail":/></p>
+                <div class="form-group">
+                    <label for="mdp" class="col-sm-2 control-label">Mot de passe</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="mdp" type="password" name="mdp"/>
+                    </div>
+                </div>
 
-    <p><input type="submit" name="validate" /></p>
-</form>
-</body>
+
+                <div class="form-group">
+                    <label for="mdp_verif" class="col-sm-2 control-label">Vérification mot de passe</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="mdp_verif" name="verifMdp"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">Adresse email</label>
+                    <div class="col-sm-10">
+                        <input type="email" id="email" class="form-control" name="mail"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default" name="validate">Valider</button>
+                    </div>
+                </div>       
+                
+            </form>         
+        </div>
+    </body>
 </html>
