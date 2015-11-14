@@ -15,36 +15,48 @@ if (isConnected()) {
     </head>
 
     <body>
-        <?php
-        include_once('layouts/header.php');
-        $pseudo = '';
-        if (isset($_COOKIE['pseudo'])) {
-            $pseudo = $_COOKIE['pseudo'];
-        }
-        ?>
-        <div class="container">
+        <div id="wrap">
+            <div id="main">
 
-            <h3>Connection au forum</h3>
+                <?php
+                include_once('layouts/header.php');
+                $pseudo = '';
+                if (isset($_COOKIE['pseudo'])) {
+                    $pseudo = $_COOKIE['pseudo'];
+                }
+                ?>
+                <div class="container">
 
-            <!-- Formulaire permettant de remplir les informations obligatoires pour la connection au forum.-->
-            <form method='POST' action="../controleur/connexion.php">
-                <div class="form-group">
-                    <label for="identifiant">Identifiant</label>
-                    <input type='text' class="form-control" placeholder="Identifiant" id="identifiant" name='pseudoIdentification' value=<?php echo $pseudo ?>>
+                    <h3>Connection au forum dédié aux chats</h3>
+
+                    <!-- Formulaire permettant de remplir les informations obligatoires pour la connection au forum.-->
+                    <form method='POST' action="../controleur/connexion.php">
+                        <div class="form-group">
+                            <label for="identifiant">Identifiant</label>
+                            <input type='text' class="form-control" placeholder="Identifiant" id="identifiant" name='pseudoIdentification' value=<?php echo $pseudo ?>>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mdp">Mot de passe</label>
+                            <input type='password' class="form-control" id="mdp" placeholder="Mot de passe" name='mdpIdentification'></p>
+                        </div>    
+                        <button type="submit" name="connectionBouton" class="btn btn-default">Se connecter</button>
+                    </form>
+                    <div>
+                        <p>Mot de passe oublié ? <a href="../vues/mdpOublie.php">Cliquez ici</a></p>
+
+                        <p>Pas encore inscrit ? <a href="../vues/inscription.php">Cliquez ici</a> </p>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="mdp">Mot de passe</label>
-                    <input type='password' class="form-control" id="mdp" placeholder="Mot de passe" name='mdpIdentification'></p>
-                </div>    
-                <button type="submit" name="connectionBouton" class="btn btn-default">Se connecter</button>
-            </form>
-            <div>
-                <p>Mot de passe oublié ? <a href="../vues/mdpOublie.php">Cliquez ici</a></p>
-
-                <p>Pas encore inscrit ? <a href="../vues/inscription.php">Cliquez ici</a> </p>
             </div>
+
+            <footer>
+                <iframe src="../vues/cat-ball.html"  scrolling="no" seamless="seamless" style="overflow: hidden;width: 100%;min-height: 300px">
+            </footer>
+
         </div>
+
     </body>
 
 </html>

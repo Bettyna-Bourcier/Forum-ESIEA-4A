@@ -23,7 +23,7 @@ include_once('../modele/sujets.php');
         <?php include_once('layouts/header.php'); ?>
         <div class="container">
             <header>
-                <p><h3>Bienvenue sur le forum !</h3></p>
+                <p><h3>Bienvenue sur le forum dédié aux chats !</h3></p>
                 <?php
                 if (!isConnected()) {
                     echo 'Pour voir les sujets, veuillez vous <a href="connexion.php">connecter</a>.';
@@ -96,6 +96,7 @@ include_once('../modele/sujets.php');
             }
             ?>
         </div>
+        <iframe src="cat-walk.html"style="height:350px; width:100%">
     </body>
 
 </html>
