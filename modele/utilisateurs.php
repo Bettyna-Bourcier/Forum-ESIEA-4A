@@ -10,7 +10,6 @@ function insert_informations_connection($identifiant, $mdp, $mail)
         global $bdd; // On récupère l'objet $bdd représentant la connection à la base
         $req = $bdd->prepare('INSERT INTO utilisateurs (identifiant, mot_de_passe, adresse_mail) VALUES(?,?,?)');
         $req->execute(array($identifiant,$mdp,$mail));
-        header('Location: ../vues/connexion.php');
     }
     catch (Exception $e)
     {

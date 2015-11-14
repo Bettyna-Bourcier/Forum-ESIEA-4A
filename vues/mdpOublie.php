@@ -15,6 +15,18 @@ session_start();
         <?php include_once('layouts/header.php'); ?>
         <div class="container"
              <p>Rentrez votre identifiant et votre adresse email afin de changer de mot de passe.</p>
+
+            <?php
+            if (isset($_GET['erreur']) && $_GET['erreur'] == true) {
+                ?>     
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    Les informations rentrées sont incorrectes.
+                </div>
+                <?php
+            }
+            ?>
             <!--Formulaire permettant le changement de mot de passe en cas d'oublie.-->
             <form class="form-horizontal" action="../controleur/mdp.php" method="POST">
 

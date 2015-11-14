@@ -24,13 +24,18 @@ if (!isset($_SESSION['identifiant'])) { // on redirige sur la page de connexion 
 
         <?php
         if (isset($_GET['erreur']) && $_GET['erreur'] == 'image_size') {
-            echo '<p classe="alert">Le taille de l\'image ne doit pas être supérieure à 150x150 et ne doit pas dépasser 2Mo.</p>';
+            echo '<div class="alert alert-danger" role="alert">'
+            . '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>'
+            . '<span class="sr-only">Error:</span>'
+            . ' La taille de l\'image ne doit pas être supérieure à 150x150 et ne doit pas dépasser 2Mo.'
+            . '</div>';
         }
         if (is_actif($_SESSION['identifiant'])) {
             echo '<p>Votre compte est validé.</p>';
         } else {
             echo '<p>Votre inscription au forum doit être valider par les administrateurs.</p>';
         }
+        
         ?>
 
         <?php
@@ -113,7 +118,17 @@ if (!isset($_SESSION['identifiant'])) { // on redirige sur la page de connexion 
         </form>
 
         <h3>Changer mon mot de passe</h3>
-        <form class="form-horizontal" method="POST" action="../controleur/pagePerso.php">
+        
+        <?php
+        if (isset($_GET['erreur']) && $_GET['erreur'] == 'mdp') {
+            echo '<div class="alert alert-danger" role="alert">'
+            . '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>'
+            . '<span class="sr-only">Error:</span>'
+            . ' Le mot de passe et sa vérification doivent être identitiques.'
+            . '</div>';
+        }
+        ?>
+        <form class="form-horizontal" method="POST" action="../controleur/pagePerso.php">            
             <div class="form-group">
                 <label for="mdp" class="col-sm-2 control-label">Mot de passe</label>
                 <div class="col-sm-10">

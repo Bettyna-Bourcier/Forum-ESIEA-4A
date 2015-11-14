@@ -31,6 +31,8 @@ if (isset($_POST['boutonModif'])) // Formulaire de modification des infos du com
     if ($mdp == $mdpVerif) {
         modification_mdp($_SESSION['identifiant'], $mdp);
         header('Location: ../vues/pagePerso.php');
+    } else {
+        header('Location: ../vues/pagePerso.php?erreur=mdp');
     }
 } elseif (isset($_POST['signatureSubmit'])) { // Formulaire de signature
     $signature = $_POST['textAreaSignature'];

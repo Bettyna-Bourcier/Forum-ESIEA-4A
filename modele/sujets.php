@@ -34,7 +34,7 @@ function recuperation_sujet($id)
 {
     try {
         global $bdd;
-        $req = $bdd->prepare('SELECT sujets.*, utilisateurs.identifiant, utilisateurs.signature FROM sujets JOIN utilisateurs ON sujets.utilisateurs_id = utilisateurs.id WHERE sujets.id=?');
+        $req = $bdd->prepare('SELECT sujets.*, utilisateurs.identifiant, utilisateurs.signature, utilisateurs.image FROM sujets JOIN utilisateurs ON sujets.utilisateurs_id = utilisateurs.id WHERE sujets.id=?');
         $req->execute(array($id));
         $sujet = $req->fetch();
         return $sujet;

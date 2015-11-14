@@ -26,7 +26,7 @@
                 <?php } ?>
             </ul>
             <div class="navbar-right">
-                <a href="../actions/deconnexion.php" class="btn btn-default navbar-btn">Deconnexion</a>
+                <a href="../controleur/deconnexion.php" class="btn btn-default navbar-btn">Deconnexion</a>
             </div>
         <?php } ?>
     </div><!-- /.container -->

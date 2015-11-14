@@ -20,6 +20,17 @@
 
         <div class="container">
             <h3>Inscription</h3>
+            <?php
+            if (isset($_GET['erreur']) && $_GET['erreur'] == 'inscription') {
+                ?>
+                <div class = "alert alert-danger" role = "alert">
+                <span class = "glyphicon glyphicon-exclamation-sign" aria-hidden = "true"></span>
+                <span class = "sr-only">Error:</span>
+                Veuillez remplir correctement tous les champs. 
+                </div>
+            <?php
+            }
+            ?>
             <form class="form-horizontal" method="POST" action="../controleur/inscription.php">
                 <h4>Tous les renseignements demandés sont obligatoires.</h4>
 
@@ -57,7 +68,7 @@
                         <button type="submit" class="btn btn-default" name="validate">Valider</button>
                     </div>
                 </div>       
-                
+
             </form>         
         </div>
     </body>
