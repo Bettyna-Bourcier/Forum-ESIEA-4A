@@ -42,7 +42,7 @@ session_start();
                 <div class="form-group">
                     <label for="identifiant" class="col-sm-2 control-label">Adresse email</label>
                     <div class="col-sm-10">
-                        <input type="text" id="identifiant" class="form-control" name="adresseEmail">
+                        <input type="email" id="identifiant" class="form-control" name="adresseEmail">
                     </div>
                 </div>
 

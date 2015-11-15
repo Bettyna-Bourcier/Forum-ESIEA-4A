@@ -24,4 +24,9 @@ function canModify($utilisteur) {
         return true;
     }
 }
+
+// retourne une url avec un timestamp pour eviter le cache navigateur
+function imageUrlWithTime($imageUrl) {
+    return "$imageUrl?" . time();
+}
    

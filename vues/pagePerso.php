@@ -48,7 +48,7 @@ if (!isset($_SESSION['identifiant'])) { // on redirige sur la page de connexion 
                     <?php
                     // si une photo est présente pour l'utilsateur, on l'affiche
                     if (file_exists('../utilisateurs/' . $_SESSION['identifiant'] . '/image.jpeg')) {
-                        echo "<img class='img-thumbnail' src='../utilisateurs/" . $_SESSION['identifiant'] . "/image.jpeg?" . time() . "' />"; // time() retourne le nombre de s depuis le 01/01/1970 => éviter le cache navigateur
+                        echo "<img class='img-thumbnail' src='". imageUrlWithTime("../utilisateurs/" . $_SESSION['identifiant'] . "/image.jpeg") ."' />"; // time() retourne le nombre de s depuis le 01/01/1970 => éviter le cache navigateur
                     }
                     ?>
 

@@ -24,7 +24,7 @@ session_start();
             echo '<ul class="media-list">'
             . '<li class="media">'
             . '<div class="media-left media-top">'
-                    . '<img class="media-object" width="100" height="100" src="'.$sujet['image'].'">'
+                    . '<img class="media-object" width="100" height="100" src="'.imageUrlWithTime($sujet['image']).'">'
             . '</div>'
             . '<div class="media-body">'
                     . '<h3 class="media-heading">'. $sujet['titre'].'<small> par '.$sujet['identifiant'].'</small> </h3>'
